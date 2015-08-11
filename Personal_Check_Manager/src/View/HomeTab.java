@@ -8,6 +8,10 @@ import javax.swing.JTable;
 
 public class HomeTab extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static JTable table;
 	private static JScrollPane scrollPane;
 	private String[] columnNames = {"ID", "Date", "Amount", "State Tax", "Federal Tax", "Pension", "Medical"};
