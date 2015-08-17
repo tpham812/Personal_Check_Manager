@@ -8,10 +8,11 @@ public class Main_GUI {
 
 	private static JTabbedPane tabbedPane;
 	private static JFrame frame;
-	private static JPanel[] panel;
+	private static JPanel homePanel;
+	private static JPanel addPanel;
 	
 	public static void main(String[] args) {
-		
+
 		initializeComponents();
 		createMainFrame();
 	}
@@ -19,19 +20,18 @@ public class Main_GUI {
 	static void initializeComponents() {
 		
 		frame = new JFrame("Personal Check Manager");
-		panel = new JPanel[2];
-		panel[0] = new HomeTab();
-		panel[1] = new AddTab();
-		
+		homePanel = new HomeTab();
+		addPanel = new AddTab();
 	}
+	
 	static void createMainFrame() {
 		
 		frame.setMinimumSize(new Dimension(1100,600));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		tabbedPane = new JTabbedPane();
-		tabbedPane.addTab("<html><body marginwidth = 35 marginheight = 5>Home</body></html>", panel[0]);
-		tabbedPane.addTab("<html><body marginwidth = 35 marginheight = 5>Add</body></html>", panel[1]);
+		tabbedPane.addTab("<html><body marginwidth = 35 marginheight = 5>Home</body></html>", homePanel);
+		tabbedPane.addTab("<html><body marginwidth = 35 marginheight = 5>Add</body></html>", addPanel);
 		frame.add(tabbedPane);
 	}
 }
