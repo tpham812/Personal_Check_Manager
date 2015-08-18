@@ -1,7 +1,6 @@
 package Model;
 
 import java.sql.Date;
-import java.util.Calendar;
 
 public class Check {
 
@@ -12,25 +11,7 @@ public class Check {
 	private float federal_tax;
 	private float pension;
 	private float medical;
-	private Calendar calendar;
 	
-	public Check(int ID, float amount, float state_tax, float federal_tax, float pension, float medical, int month, int day, int year) {
-		
-		this.ID = ID;
-		this.amount = amount;
-		this.state_tax = state_tax;
-		this.federal_tax = federal_tax;
-		this.pension = pension;
-		this.medical = medical;
-		this.calendar = Calendar.getInstance();
-		setDate(month, day, year);
-	}
-	
-	public Check(int month, int day, int year) {
-		
-		this.calendar = Calendar.getInstance();
-		setDate(month, day, year);
-	}
 	
 	public void setID(int ID) {
 		
@@ -62,10 +43,9 @@ public class Check {
 		this.pension = medical;
 	}
 	
-	public void setDate(int month, int day, int year) {
+	public void setDate(Date date) {
 		
-		calendar.set(year, month, day);
-		date = new Date(calendar.getTimeInMillis());
+		this.date = date;
 	}
 	
 	public int getID() {
