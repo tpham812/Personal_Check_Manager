@@ -30,7 +30,6 @@ public class HomeTab extends JPanel {
 	
 	public void createPanel() {
 		
-		add(scrollPane);
-		
+		add(scrollPane);	
 	}
 }

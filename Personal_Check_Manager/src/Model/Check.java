@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Check {
 
-	private int ID;
+	private int Id;
 	private Date date;
 	private float amount;
 	private float state_tax;
@@ -13,9 +13,9 @@ public class Check {
 	private float medical;
 	
 	
-	public void setID(int ID) {
+	public void setID(int Id) {
 		
-		this.ID = ID;
+		this.Id = Id;
 	}
 	
 	public void setAmount(float amount) {
@@ -50,7 +50,7 @@ public class Check {
 	
 	public int getID() {
 		
-		return ID;
+		return Id;
 	}
 	
 	public float getAmount() {

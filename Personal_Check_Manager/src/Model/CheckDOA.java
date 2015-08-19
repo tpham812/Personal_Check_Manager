@@ -1,9 +1,11 @@
 package Model;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet; 
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class CheckDOA {
 
@@ -27,9 +29,10 @@ public class CheckDOA {
 		try {
 			connection = DriverManager.getConnection(url, username, password);
 			statement = connection.createStatement();
-			String sqlQuery = "SELECT * FROM CHECK" +
+			String sqlCommand = "SELECT * FROM CHECK " +
 					"LIMIT 100 OFFSET " + offset;
-			resultSet = statement.executeQuery(sqlQuery);
+			resultSet = statement.executeQuery(sqlCommand);
+	
 			checks.clear();
 			try {
 				while(resultSet.next()) {
@@ -57,16 +60,65 @@ public class CheckDOA {
 		return checks;
 	}
 
-	public void createRecord(int ID, float amount, float state_tax, float federal_tax, float pension, float medical, int month, int day, int year) {
+	public void createRecord(int Id, float amount, float state_Tax, float federal_Tax, float pension, float medical, int month, int day, int year) {
+
+		Connection connection = null;
+		Statement statement = null;
+		Calendar calendar = null;
+		try {
+			calendar = Calendar.getInstance();
+			calendar.set(year, month, day);
+			Date date = new Date(calendar.getTimeInMillis());
+			connection = DriverManager.getConnection(url, username, password);
+			statement = connection.createStatement();
+			Check check = new Check();
+			check.setID(Id);
+			check.setAmount(amount);
+			check.setState_Tax(state_Tax);
+			check.setFederal_Tax(federal_Tax);
+			check.setPension(pension);
+			check.setMedical(medical);
+			check.setDate(date);
+			checks.add(check);
+			String sqlCommand = "INSERT INTO CHECK (Id, Amount, StateTax, FederalTax, Pension, Medical, Date)" +
+					"VALUES (" +
+					"'" + Id + "'," +
+					"'" + state_Tax + "'," +
+					"'" + federal_Tax + "'," +
+					"'" + pension + "'," +
+					"'" + medical + "'," +
+					"'" + date + "')";
+			statement.execute(sqlCommand);
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			closeAllObjects(null, statement, connection);
+		}
+	}
+
+	public void updateRecord(int Id, float amount, float state_Tax, float federal_Tax, float pension, float medical, int month, int day, int year) {
 
 	}
 
-	public void updateRecord(int ID, float amount, float state_tax, float federal_tax, float pension, float medical, int month, int day, int year) {
+	public void deleteRecord(int Id) {
 
-	}
-
-	public void deleteRecord(int ID) {
-
+		Connection connection = null;
+		Statement statement = null;
+		try {
+			connection = DriverManager.getConnection(url, username, password);
+			statement = connection.createStatement();
+			String sqlCommand = "DELETE FROM CHECK " +
+								"WHERE Id = " + Id;
+			statement.execute(sqlCommand);
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			closeAllObjects(null, statement, connection);
+		}
 	}
 
 	public void nextOffSet() {
